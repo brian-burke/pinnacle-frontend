@@ -14,6 +14,7 @@ const MyApp = ({ Component, pageProps }) => {
     return <ErrorPage statusCode={404} />
   }
 
+  console.log(global)
   const { metadata, favicon, metaTitleSuffix } = global.attributes
 
   return (

@@ -37,6 +37,7 @@ export async function fetchAPI(path, urlParamsObject = {}, options = {}) {
     console.error(response.statusText)
     throw new Error(`An error occured please try again`)
   }
+
   const data = await response.json()
   return data
 }
@@ -48,7 +49,7 @@ export async function fetchAPI(path, urlParamsObject = {}, options = {}) {
  * @param {string} options.locale The current locale specified in router.locale
  * @param {boolean} options.preview router isPreview value
  */
-export async function getPageData({ slug, locale, preview }) {
+export async function getNewPageData({ slug, locale, preview }) {
   // Find the pages that match this slug
   const gqlEndpoint = getStrapiURL("/graphql")
   const pagesRes = await fetch(gqlEndpoint, {
@@ -76,7 +77,7 @@ export async function getPageData({ slug, locale, preview }) {
           $publicationState: PublicationState!
           $locale: I18NLocaleCode!
         ) {        
-          pages(
+          newPages(
             filters: { slug: { eq: $slug } }
             publicationState: $publicationState
             locale: $locale
@@ -249,12 +250,13 @@ export async function getPageData({ slug, locale, preview }) {
 
   const pagesData = await pagesRes.json()
   // Make sure we found something, otherwise return null
-  if (pagesData.data?.pages == null || pagesData.data.pages.length === 0) {
-    return null
-  }
+
+  // if (pagesData.data?.newPages == null || pagesData.data.pages.length === 0) {
+  //   return null
+  // }
 
   // Return the first item since there should only be one result per slug
-  return pagesData.data.pages.data[0]
+  return pagesData.data.newPages.data[0]
 }
 
 // Get site data from Strapi (metadata, navbar, footer...)
@@ -325,15 +327,11 @@ export async function getGlobalData(locale) {
                     ...FileParts
                   }
                   smallText
-                  columns {
-                    id
-                    title
                     links {
                       id
                       url
                       newTab
                       text
-                    }
                   }
                 }
               }
@@ -348,6 +346,5 @@ export async function getGlobalData(locale) {
   })
 
   const global = await globalRes.json()
-  console.log(global.data.global)
   return global.data.global
 }

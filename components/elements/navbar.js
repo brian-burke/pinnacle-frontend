@@ -23,13 +23,23 @@ const Navbar = ({ navbar, pageContext }) => {
         <div className="container flex flex-row items-center justify-between">
           {/* Content aligned to the left */}
           <div className="flex flex-row items-center">
-            <Link href="/">
+            <Link href="/home">
               <a className="h-8 w-32">
                 <NextImage width="120" height="33" media={navbar.logo} />
               </a>
             </Link>
+
+          </div>
+          <div className="flex">
+            {/* Hamburger menu on mobile */}
+            <button
+              onClick={() => setMobileMenuIsShown(true)}
+              className="p-1 block md:hidden"
+            >
+              <MdMenu className="h-8 w-auto" />
+            </button>
             {/* List of links on desktop */}
-            <ul className="hidden list-none md:flex flex-row gap-4 items-baseline ml-10">
+            <ul className="hidden list-none md:flex flex-row gap-4 ml-10">
               {navbar.links.map((navLink) => (
                 <li key={navLink.id}>
                   <CustomLink link={navLink} locale={router.locale}>
@@ -40,37 +50,6 @@ const Navbar = ({ navbar, pageContext }) => {
                 </li>
               ))}
             </ul>
-          </div>
-          <div className="flex">
-            {/* Locale Switch Mobile */}
-            {pageContext.localizedPaths && (
-              <div className="md:hidden">
-                <LocaleSwitch pageContext={pageContext} />
-              </div>
-            )}
-            {/* Hamburger menu on mobile */}
-            <button
-              onClick={() => setMobileMenuIsShown(true)}
-              className="p-1 block md:hidden"
-            >
-              <MdMenu className="h-8 w-auto" />
-            </button>
-            {/* CTA button on desktop */}
-            {navbar.button && (
-              <div className="hidden md:block">
-                <ButtonLink
-                  button={navbar.button}
-                  appearance={getButtonAppearance(navbar.button.type, "light")}
-                  compact
-                />
-              </div>
-            )}
-            {/* Locale Switch Desktop */}
-            {pageContext.localizedPaths && (
-              <div className="hidden md:block">
-                <LocaleSwitch pageContext={pageContext} />
-              </div>
-            )}
           </div>
         </div>
       </nav>

@@ -1,5 +1,5 @@
 import ErrorPage from "next/error"
-import { getPageData, fetchAPI, getGlobalData } from "utils/api"
+import { getPageData, fetchAPI, getGlobalData,getNewPageData } from "utils/api"
 import Sections from "@/components/sections"
 import Seo from "@/components/elements/seo"
 import { useRouter } from "next/router"
@@ -12,6 +12,8 @@ import { getLocalizedPaths } from "utils/localize"
 
 const DynamicPage = ({ sections, metadata, preview, global, pageContext }) => {
   const router = useRouter()
+
+  console.log(sections)
 
   // Check if the required data was provided
   if (!router.isFallback && !sections?.length) {
@@ -27,12 +29,12 @@ const DynamicPage = ({ sections, metadata, preview, global, pageContext }) => {
   if (metadata.shareImage?.data == null) {
     delete metadata.shareImage
   }
+
   const metadataWithDefaults = {
     ...global.attributes.metadata,
     ...metadata,
   }
 
-  console.log(sections)
 
   return (
     <Layout global={global} pageContext={pageContext}>
@@ -49,12 +51,13 @@ export async function getStaticPaths(context) {
   const pages = await context.locales.reduce(
     async (currentPagesPromise, locale) => {
       const currentPages = await currentPagesPromise
-      const localePages = await fetchAPI("/pages", {
+      const localePages = await fetchAPI("/new-pages", {
         locale,
         fields: ["slug", "locale"],
       })
       return [...currentPages, ...localePages.data]
     },
+
     Promise.resolve([])
   )
 
@@ -78,7 +81,14 @@ export async function getStaticProps(context) {
 
   const globalLocale = await getGlobalData(locale)
   // Fetch pages. Include drafts if preview mode is on
-  const pageData = await getPageData({
+
+  // const pageData = await getPageData({
+  //   slug: (!params.slug ? [""] : params.slug).join("/"),
+  //   locale,
+  //   preview,
+  // })
+
+  const pageData = await getNewPageData({
     slug: (!params.slug ? [""] : params.slug).join("/"),
     locale,
     preview,

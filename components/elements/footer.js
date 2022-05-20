@@ -13,24 +13,14 @@ const Footer = ({ footer }) => {
           )}
         </div>
         <nav className="flex flex-wrap flex-row lg:gap-20 items-start lg:justify-end mb-10">
-          {footer.columns.map((footerColumn) => (
+          {footer.links.map((link) => (
             <div
-              key={footerColumn.id}
+              key={link.id}
               className="mt-10 lg:mt-0 w-6/12 lg:w-auto"
             >
-              <p className="uppercase tracking-wide font-semibold">
-                {footerColumn.title}
-              </p>
-              <ul className="mt-2">
-                {footerColumn.links.map((link) => (
-                  <li
-                    key={link.id}
-                    className="text-gray-700 py-1 px-1 -mx-1 hover:text-gray-900"
-                  >
-                    <CustomLink link={link}>{link.text}</CustomLink>
-                  </li>
-                ))}
-              </ul>
+              <a className="uppercase tracking-wide font-semibold" href={link.url}>
+                {link.text}
+              </a>
             </div>
           ))}
         </nav>
@@ -51,7 +41,7 @@ Footer.propTypes = {
           .isRequired,
         title: PropTypes.string.isRequired,
         links: PropTypes.arrayOf(linkPropTypes),
-      })
+      }),
     ),
     smallText: PropTypes.string.isRequired,
   }),

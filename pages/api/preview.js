@@ -1,4 +1,4 @@
-import { getPageData } from "utils/api"
+import { getNewPageData } from "utils/api"
 import { parseCookies } from "utils/parse-cookies"
 
 const preview = async (req, res) => {
@@ -11,7 +11,7 @@ const preview = async (req, res) => {
   const cookies = parseCookies(req)
   const slugArray = req.query.slug.split("/")
   // Fetch the headless CMS to check if the provided `slug` exists
-  const pageData = await getPageData({
+  const pageData = await getNewPageData({
     locale,
     slug: slugArray.join("/"),
     preview: true,
