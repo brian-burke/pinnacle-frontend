@@ -248,7 +248,6 @@ export async function getNewPageData({ slug, locale, preview }) {
                        ... FileParts
                       }
                     heading
-                    subheading
                    }
                   }
 
