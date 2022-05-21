@@ -9,7 +9,7 @@ import RichText from "./sections/rich-text"
 import Pricing from "./sections/pricing"
 import LeadForm from "./sections/lead-form"
 import Cards from "./sections/cards"
-import Carousel from "./sections/Carousel"
+import Carousel from "./sections/carousel"
 
 // Map Strapi sections to section components
 const sectionComponents = {
