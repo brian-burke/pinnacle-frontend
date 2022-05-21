@@ -223,6 +223,35 @@ export async function getNewPageData({ slug, locale, preview }) {
                       pricePeriod
                     }
                   }
+                  
+                 ... on ComponentSectionsCards {
+                  id
+                  cards {
+                    content
+                    image{
+                       ... FileParts
+                      }
+                    button {
+                        id
+                        url
+                        newTab
+                        text
+                        type
+                      }
+                    }
+                  }
+                  
+                 ... on ComponentSectionsCarousel {
+                  id
+                  slides {
+                    image{
+                       ... FileParts
+                      }
+                    heading
+                    subheading
+                   }
+                  }
+
                   ... on ComponentSectionsLeadForm {
                     id
                     emailPlaceholder
@@ -256,6 +285,7 @@ export async function getNewPageData({ slug, locale, preview }) {
   // }
 
   // Return the first item since there should only be one result per slug
+  console.log(pagesData)
   return pagesData.data.newPages.data[0]
 }
 

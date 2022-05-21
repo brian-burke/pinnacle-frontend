@@ -6,7 +6,12 @@ import { DefaultSeo } from "next-seo"
 import { getStrapiMedia } from "utils/media"
 import { getGlobalData } from "utils/api"
 import "@/styles/index.css"
+import dynamic from 'next/dynamic'
 
+const Sample = dynamic(
+  () => import('tw-elements'),
+  { ssr : false }
+)
 const MyApp = ({ Component, pageProps }) => {
   // Extract the data we need
   const { global } = pageProps
@@ -14,7 +19,6 @@ const MyApp = ({ Component, pageProps }) => {
     return <ErrorPage statusCode={404} />
   }
 
-  console.log(global)
   const { metadata, favicon, metaTitleSuffix } = global.attributes
 
   return (

@@ -8,6 +8,8 @@ import TestimonialsGroup from "@/components/sections/testimonials-group"
 import RichText from "./sections/rich-text"
 import Pricing from "./sections/pricing"
 import LeadForm from "./sections/lead-form"
+import Cards from "./sections/cards"
+import Carousel from "./sections/Carousel"
 
 // Map Strapi sections to section components
 const sectionComponents = {
@@ -20,6 +22,8 @@ const sectionComponents = {
   ComponentSectionsRichText: RichText,
   ComponentSectionsPricing: Pricing,
   ComponentSectionsLeadForm: LeadForm,
+  ComponentSectionsCards: Cards,
+  ComponentSectionsCarousel: Carousel,
 }
 
 // Display a section individually
