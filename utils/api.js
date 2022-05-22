@@ -133,6 +133,23 @@ export async function getNewPageData({ slug, locale, preview }) {
                       ...FileParts
                     }
                   }
+                  
+                  ... on ComponentSectionsNewHero {
+                    id
+                    buttons {
+                      id
+                      newTab
+                      text
+                      type
+                      url
+                    }
+                    title
+                    description
+                    label
+                    picture {
+                      ...FileParts
+                    }
+                  }
                   ... on ComponentSectionsFeatureColumnsGroup {
                     id
                     features {

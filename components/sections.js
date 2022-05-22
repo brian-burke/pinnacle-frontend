@@ -10,6 +10,7 @@ import Pricing from "./sections/pricing"
 import LeadForm from "./sections/lead-form"
 import Cards from "./sections/cards"
 import Carousel from "./sections/carousel"
+import NewHero from "./sections/newHero"
 
 // Map Strapi sections to section components
 const sectionComponents = {
@@ -24,6 +25,7 @@ const sectionComponents = {
   ComponentSectionsLeadForm: LeadForm,
   ComponentSectionsCards: Cards,
   ComponentSectionsCarousel: Carousel,
+  ComponentSectionsNewHero: NewHero,
 }
 
 // Display a section individually
